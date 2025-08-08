@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  password String
+  queue UserAlbum[]
+}
+
+model Album {
+  id String @id @default(cuid())
+  title String
+  artist String
+  cover String?
+  releaseDate String?
+  genres String[]
+  users UserAlbum[]
+}
+
+model UserAlbum {
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  album Album @relation(fields: [albumId], references: [id])
+  albumId String
+  addedAt DateTime @default(now())
+  
+  @@unique([userId, albumId]) // “Each user can only queue the same album once.”
+}
+

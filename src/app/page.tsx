@@ -22,6 +22,7 @@ export default async function Home() {
           alt={session.user.name ?? "Avatar"}
           />
         )}
+        Testtest
       </>
     )
   }

@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { auth } from "@/auth";
 import SignInButton from "./components/SignInButton";
+import "./globals.css";
+
+import SearchBar from "./components/SearchBar";
 
 export default async function Home() {
 
@@ -22,7 +25,7 @@ export default async function Home() {
           alt={session.user.name ?? "Avatar"}
           />
         )}
-        Testtest
+        <SearchBar />
       </>
     )
   }
@@ -30,7 +33,7 @@ export default async function Home() {
   return (
     <>
       {" "}
-            <p> You Are Not Signed In</p>
+      <p> You Are Not Signed In</p>
       <SignInButton />
     </>
   );

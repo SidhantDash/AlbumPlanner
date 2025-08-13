@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
+/* Background to work with Safari */
+/* _::-webkit-full-page-media, _:future, :root .panel {
+  --background: #313131 !important;
+  --foreground: #fff;
+} */
+
+/* Another way for background to work with Safari */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  --background: #313131;
+  --foreground: #fff;
 }
 
 body {
-  background: var(--background);
+  background: var(--background) !important;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@theme {
+  --color-mq-darkgray: #1F1F1F;
 }

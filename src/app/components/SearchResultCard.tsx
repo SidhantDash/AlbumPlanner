@@ -25,7 +25,7 @@ export default function SearchResultCard({title, artist, cover, releaseDate, gen
     });
     
     return (
-        <div className="bg-mq-lightgray rounded-3xl flex flex-row justify-between content-center p-4 w-84 h-36 gap-x-3">
+        <label className="bg-mq-lightgray rounded-3xl flex flex-row justify-between content-center p-4 w-84 h-36 gap-x-3 transition hover:ring-2 has-checked:ring-3 has-checked:ring-mq-lightblue">
             <div className="h-full aspect-square rounded-2xl overflow-hidden shrink-0">
                 <Image 
                     src="/images/EmptySymbol.png"
@@ -57,6 +57,6 @@ export default function SearchResultCard({title, artist, cover, releaseDate, gen
                 >
                 </input>
             </div>
-        </div>
+        </label>
     )
 }

@@ -4,6 +4,7 @@ import SignInButton from "./components/SignInButton";
 import "./globals.css";
 
 import SearchBar from "./components/SearchBar";
+import SearchResultCard from "./components/SearchResultCard";
 
 export default async function Home() {
 
@@ -26,6 +27,12 @@ export default async function Home() {
           />
         )}
         <SearchBar />
+        <SearchResultCard 
+          title={"DON'T TAP THE GLASSPROMISEMasdfasdfasdfasdfE"}
+          artist={"POiSEN GiRLFRiEND & Danny Brown"}
+          releaseDate={"2017"}
+          genres={["Industrial hip-hop", "Cloud rap", "Rnb", "Pop", "Southern hip-hop"]}
+        />
       </>
     )
   }

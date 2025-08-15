@@ -23,4 +23,6 @@ body {
 
 @theme {
   --color-mq-darkgray: #1F1F1F;
+  --color-mq-lightgray: #3A3A3A;
+  --color-mq-lightblue: #6DBDFF;
 }

@@ -28,13 +28,22 @@ export default async function Home() {
           alt={session.user.name ?? "Avatar"}
           />
         )}
-        <div className="flex flex-row p-16 gap-4">
-          <div className="flex flex-col gap-4 w-2/3">
-            <SearchBar />
-            <SearchResults />
+
+        <div className="p-16">
+          <div className="flex flex-row mb-2">
+            <div className="w-2/3"></div>
+            <h1 className="w-1/3 text-3xl font-extrabold text-center">
+              Saved <span className="text-mq-lightblue">Albums</span>
+            </h1>
           </div>
-          <div className="w-1/3">
-            <SavedAlbums />
+          <div className="flex flex-row gap-4 h-[90vh]">
+            <div className="flex flex-col gap-4 w-2/3">
+              <SearchBar />
+              <SearchResults />
+            </div>
+            <div className="w-1/3">
+              <SavedAlbums />
+            </div>
           </div>
         </div>
         

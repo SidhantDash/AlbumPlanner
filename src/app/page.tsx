@@ -5,6 +5,8 @@ import "./globals.css";
 
 import SearchBar from "./components/SearchBar";
 import SearchResultCard from "./components/SearchResultCard";
+import SearchResults from "./components/SearchResults";
+import SavedAlbums from "./components/SavedAlbums";
 
 export default async function Home() {
 
@@ -26,13 +28,17 @@ export default async function Home() {
           alt={session.user.name ?? "Avatar"}
           />
         )}
-        <SearchBar />
-        <SearchResultCard 
-          title={"DON'T TAP THE GLASSPROMISEMasdfasdfasdfasdfE"}
-          artist={"POiSEN GiRLFRiEND & Danny Brown"}
-          releaseDate={"2017"}
-          genres={["Industrial hip-hop", "Cloud rap", "Rnb", "Pop", "Southern hip-hop"]}
-        />
+        <div className="flex flex-row p-16 gap-4">
+          <div className="flex flex-col gap-4 w-2/3">
+            <SearchBar />
+            <SearchResults />
+          </div>
+          <div className="w-1/3">
+            <SavedAlbums />
+          </div>
+        </div>
+        
+        
       </>
     )
   }

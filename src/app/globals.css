@@ -26,3 +26,12 @@ body {
   --color-mq-lightgray: #3A3A3A;
   --color-mq-lightblue: #6DBDFF;
 }
+
+
+.saved_albums_hamburger_icon svg {
+  fill: white;
+}
+
+.saved_albums_hamburger_icon:hover:active svg {
+  fill: #6DBDFF;
+}

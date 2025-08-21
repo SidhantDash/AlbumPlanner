@@ -4,7 +4,6 @@ import SignInButton from "./components/SignInButton";
 import "./globals.css";
 
 import SearchBar from "./components/SearchBar";
-import SearchResultCard from "./components/SearchResultCard";
 import SearchResults from "./components/SearchResults";
 import SavedAlbums from "./components/SavedAlbums";
 
@@ -37,7 +36,7 @@ export default async function Home() {
             </h1>
           </div>
           <div className="flex flex-row gap-4 h-[90vh]">
-            <div className="flex flex-col gap-4 w-2/3">
+            <div className="flex flex-col items-center gap-4 w-2/3">
               <SearchBar />
               <SearchResults />
             </div>

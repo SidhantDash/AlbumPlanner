@@ -1,9 +1,40 @@
-'use client'
+'use client';
 
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { FaSearch } from "react-icons/fa";
 
+
 export default function SearchBar() {
+
+    //const [searchParams, setSearchParams] = useState("");
+    // const [searchResults, setSearchResults] = useState("");
+
+    async function fetchAlbums() {
+        const response = await axios(`/api/searchAlbums?q=jpegmafia`);
+        console.log(response.data);
+    }
+
+    fetchAlbums();
+
+
+
+    const searchParams = useSearchParams();
+    const pathname = usePathname(); // gets current path from url
+    const { replace } = useRouter();
+
+    // Called everytime someone passes in input
+    const handleSearch = (searchTerm: string) => {
+        const params = new URLSearchParams(searchParams);
+        if (searchTerm) { // if someone typed in input
+            params.set("q", searchTerm);
+        } else { // if nothing is typed
+            params.delete("q");
+        }
+        replace(`${pathname}?${params.toString()}`); // replace current url without rerendering
+        console.log(params)
+    }
 
     // Overflow stuff
     // const [isOverflow, setIsOverflow] = useState(false);
@@ -15,7 +46,7 @@ export default function SearchBar() {
     // }
 
     return (
-        <div className="bg-mq-darkgray w-full rounded-full flex flex-row p-3 content-center gap-4">
+        <div className="bg-mq-darkgray w-3/4 rounded-full flex flex-row p-3 content-center gap-4">
             <FaSearch className="my-auto ml-2" />
             <input
                 type="text"
@@ -25,6 +56,17 @@ export default function SearchBar() {
                 // onInput={e => {checkOverflower(e.currentTarget)}}
                 // onKeyUp={e => {checkOverflower(e.currentTarget)}}
                 // onSelect={e => {checkOverflower(e.currentTarget)}}
+                onChange={(e) => {
+                    handleSearch(e.target.value);
+                }}
+                // onChange={e => {
+                //     setSearchParams(e.target.value)
+                // }}
+                onKeyDown={e => {
+                    if (e.key === "Enter") {
+                        fetchAlbums();
+                    }
+                }}
             />
         </div>
     )

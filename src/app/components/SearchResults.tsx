@@ -1,6 +1,22 @@
-import SearchResultCard from "./SearchResultCard";
+"use client";
 
-export default function SearchResults() {
+import SearchResultCard from "./SearchResultCard";
+import { useState } from "react";
+
+export default function SearchResults({
+    searchParams} : {
+        searchParams?: {
+            query?: string;
+        };
+    }) {
+
+        
+    const query = searchParams?.query || '';
+    console.log(query);
+    
+    const [searchResults, setSearchResults] = useState([])
+    
+
     return (
         <div className="flex flex-col h-full">
             <h1 className="text-3xl font-extrabold text-center mb-2">

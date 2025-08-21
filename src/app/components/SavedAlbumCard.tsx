@@ -13,8 +13,8 @@ export default function SavedAlbumCard({title, artist, cover, releaseDate, dateA
 
 
     return (
-        <div className="w-full h-28 bg-mq-lightgray rounded-3xl flex flex-row items-center justify-between  overflow-hidden">
-            <div className="w-1/7 h-full flex justify-center items-center transition-all hover:border-2 hover:bg-[#454545] active:transition-none active:border-3 active:border-mq-lightblue cursor-pointer rounded-l-3xl saved_albums_hamburger_icon">
+        <div className="w-full h-28 bg-mq-lightgray rounded-3xl flex flex-row items-center justify-between  overflow-hidden shrink-0">
+            <div className="w-1/7 h-full flex justify-center items-center transition-all hover:border-2 hover:bg-[#454545] active:transition-none active:border-3 active:border-mq-lightblue cursor-grab rounded-l-3xl saved_albums_hamburger_icon">
                 <GiHamburgerMenu />
             </div>
             <div className="w-5/7 h-3/4 px-1 flex flex-row gap-x-2 grow justify-start items-center">

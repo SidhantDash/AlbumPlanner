@@ -25,30 +25,13 @@ export const spAuthRequest = async (): Promise<string | null> => {
             headers: authOptions.headers
         });
 
-        console.log(response.data)
+        console.log(response.data);
         const token = response.data.access_token;
         return token;
     } catch (err) {
         console.log(err);
-        return null
+        return null;
     }
-}
-
-export async function getAlbums(searchParam : string) {
-
-    const accessToken = await spAuthRequest();
-
-    const response = await axios('https://api.spotify.com/v1/search', {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        },
-        params: {
-            q: searchParam,
-            type: "album"
-        }
-    });
-
-    return response.data;
 }
 
 export async function GET(request: NextRequest) {

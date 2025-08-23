@@ -4,7 +4,7 @@ import Image from "next/image";
 interface SearchResultProps {
     title: string;
     artist: string;
-    cover?: string;
+    cover: string;
     releaseDate?: string;
     genres: string[];
 }
@@ -27,7 +27,7 @@ export default function SearchResultCard({title, artist, cover, releaseDate, gen
         <label className="bg-mq-lightgray rounded-3xl flex flex-row justify-between content-center p-4 w-84 h-36 gap-x-3 transition hover:bg-[#454545] hover:ring-2 has-checked:ring-3 has-checked:ring-mq-lightblue cursor-pointer">
             <div className="h-full aspect-square rounded-2xl overflow-hidden shrink-0 select-none">
                 <Image 
-                    src="/images/EmptySymbol.png"
+                    src={cover}
                     alt="No Album Cover Provided"
                     width={300}
                     height={300}
@@ -35,7 +35,7 @@ export default function SearchResultCard({title, artist, cover, releaseDate, gen
                 />
             </div>
             
-            <div className="flex flex-col justify-start gap-y-1">
+            <div className="flex flex-col w-full justify-start gap-y-1">
                 <h1 className="font-bold text-xl/5 line-clamp-2 break-all">{title}</h1>
                 <h2 className="font-semibold text-base/4 line-clamp-2 break-all text-mq-lightblue">{artist}</h2>
                 <h2 className="font-medium text-base/4">{releaseDate}</h2>

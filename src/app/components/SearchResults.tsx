@@ -3,27 +3,27 @@
 import SearchResultCard from "./SearchResultCard";
 import { useState } from "react";
 
-export default function SearchResults({
-    searchParams} : {
-        searchParams?: {
-            query?: string;
-        };
-    }) {
 
+
+// export default function SearchResults({
+//     searchParams} : {
+//         searchParams?: {
+//             query?: string;
+//         };
+//     }, results : any) {
         
-    const query = searchParams?.query || '';
-    console.log(query);
-    
-    const [searchResults, setSearchResults] = useState([])
-    
+//     const query = searchParams?.query || '';
+//     console.log(query);
 
+export default function SearchResults({ results } : { results: Album[] }) {
+        
     return (
         <div className="flex flex-col h-full">
             <h1 className="text-3xl font-extrabold text-center mb-2">
                 Search <span className="text-mq-lightblue">Results</span>
             </h1>
             <div className="bg-mq-darkgray rounded-3xl flex flex-row flex-wrap justify-center content-start p-4 gap-4 w-full h-full overflow-y-scroll after:w-84">
-                <SearchResultCard
+                {/* <SearchResultCard
                     title="WHERE IS MY HEAD?"
                     artist="Rich Brian"
                     releaseDate="2025"
@@ -52,7 +52,22 @@ export default function SearchResults({
                     artist="POiSEN GiRLFRiEND"
                     releaseDate="1987"
                     genres={["Wow", "crazy"]}
-                />
+                /> */}
+                {results.length === 0 && "No Results"}
+                {results.map( (result: Album) => {
+
+                    //console.log(results);
+                    return (
+                        <SearchResultCard 
+                            title={result.name}
+                            artist={result.artists[0].name}
+                            releaseDate={result.release_date}
+                            genres={["Wow"]}
+                            cover={result.images[0].url ?? "/images/EmptySymbol.png"}
+                            key={result.id}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

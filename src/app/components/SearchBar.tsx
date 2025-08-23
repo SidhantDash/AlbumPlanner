@@ -6,19 +6,12 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { FaSearch } from "react-icons/fa";
 
 
-export default function SearchBar() {
+export default function SearchBar( { setResults } : any) {
 
     //const [searchParams, setSearchParams] = useState("");
-    // const [searchResults, setSearchResults] = useState("");
+    //const [searchResults, setSearchResults] = useState("");
 
-    async function fetchAlbums() {
-        const response = await axios(`/api/searchAlbums?q=jpegmafia`);
-        console.log(response.data);
-    }
-
-    fetchAlbums();
-
-
+    
 
     const searchParams = useSearchParams();
     const pathname = usePathname(); // gets current path from url
@@ -33,7 +26,19 @@ export default function SearchBar() {
             params.delete("q");
         }
         replace(`${pathname}?${params.toString()}`); // replace current url without rerendering
-        console.log(params)
+    }
+
+    // const handleSearch = (searchTerm: string) => {
+    //     setSearchParams(searchTerm);
+    // }
+
+    async function fetchAlbums() {
+        const q = searchParams.get('q');
+        const response = await axios(`/api/searchAlbums?q=${q}`);
+
+        setResults(response.data.albums.items);
+        console.log(response.data);
+        console.log(q);
     }
 
     // Overflow stuff
@@ -59,9 +64,6 @@ export default function SearchBar() {
                 onChange={(e) => {
                     handleSearch(e.target.value);
                 }}
-                // onChange={e => {
-                //     setSearchParams(e.target.value)
-                // }}
                 onKeyDown={e => {
                     if (e.key === "Enter") {
                         fetchAlbums();

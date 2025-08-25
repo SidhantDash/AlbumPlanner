@@ -27,7 +27,6 @@ model Album {
   artist String
   cover String?
   releaseDate String?
-  genres String[]
   users UserAlbum[]
 }
 

@@ -5,6 +5,10 @@ import qs from "qs";
 const client_id: string = process.env.SPOTIFY_CLIENT_ID!;
 const client_secret: string = process.env.SPOTIFY_CLIENT_SECRET!;
 
+let currentToken: string | null = null;
+let timeExpiration: number = 0;
+let timeTokenStored: number = 0;
+
 // from Spotify Client Credentials Flow page
 const authOptions = {
     url: 'https://accounts.spotify.com/api/token',
@@ -20,23 +24,30 @@ const authOptions = {
 
 export const spAuthRequest = async (): Promise<string | null> => {
     try {
+        
+        if (currentToken && (Date.now() - timeTokenStored) < timeExpiration) {
+            return currentToken;
+        }
+
         const response = await axios.post(authOptions.url,
             qs.stringify(authOptions.form), {
             headers: authOptions.headers
         });
+        
+        currentToken = response.data.access_token;
+        timeExpiration = response.data.expires_in * 1000; // seconds to milliseconds
+        timeTokenStored = Date.now();
 
-        console.log(response.data);
-        const token = response.data.access_token;
-        return token;
+        return currentToken;
     } catch (err) {
         console.log(err);
         return null;
     }
-}
+}   
 
 export async function GET(request: NextRequest) {
 
-    const accessToken = await spAuthRequest();
+    const accessToken = await spAuthRequest();    
     if (!accessToken) {
         return NextResponse.json(
             {

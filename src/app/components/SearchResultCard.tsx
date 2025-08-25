@@ -3,24 +3,26 @@ import Image from "next/image";
 
 interface SearchResultProps {
     title: string;
-    artist: string;
+    artist: [
+        {
+            name: string
+        }
+    ]
     cover: string;
     releaseDate?: string;
-    genres: string[];
 }
 
 // function dateToString(genres) {
 
 // }
 
-export default function SearchResultCard({title, artist, cover, releaseDate, genres}: SearchResultProps) {
+export default function SearchResultCard({title, artist, cover, releaseDate}: SearchResultProps) {
 
-    const totalGenres = genres.length;
-    let genreString = "";
-    genres.map((genre, index) => {
-        if (index === 0) genreString += genre.charAt(0).toUpperCase() + genre.slice(1);
-        else genreString += genre;
-        if (index !== totalGenres - 1) genreString += ", ";
+    const totalArtists = artist.length;
+    let artistString = "";
+    artist.map((artist, index) => {
+        artistString += artist.name;
+        if (index !== totalArtists - 1) artistString += ", ";
     });
     
     return (
@@ -37,16 +39,8 @@ export default function SearchResultCard({title, artist, cover, releaseDate, gen
             
             <div className="flex flex-col w-full justify-start gap-y-1">
                 <h1 className="font-bold text-xl/5 line-clamp-2 break-all">{title}</h1>
-                <h2 className="font-semibold text-base/4 line-clamp-2 break-all text-mq-lightblue">{artist}</h2>
+                <h2 className="font-semibold text-base/4 line-clamp-2 break-all text-mq-lightblue">{artistString}</h2>
                 <h2 className="font-medium text-base/4">{releaseDate}</h2>
-                <h2 className="font-normal text-xs line-clamp-1 break-all text-[#B7B7B7]">
-                    {/* {genres.map((genre, index) => {
-                        console.log(totalGenres)
-                        console.log(genres.length);
-                        return <p>{genre}{totalGenres - 1 === index ? "" : ", "}</p>
-                    })} */}
-                    {genreString}
-                </h2>
             </div>
 
             <div className="flex content-center items-center">

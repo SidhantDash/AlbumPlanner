@@ -13,8 +13,11 @@ export default function MainContent() {
 
     return (
         <>
-            <div className="flex flex-col items-center gap-4 w-2/3">
+            <div className="flex flex-col items-center w-2/3">
                 <SearchBar setResults={setSearchedAlbums}/>
+                <h1 className="text-3xl font-extrabold text-center mb-2 mt-4">
+                Search <span className="text-mq-lightblue">Results</span>
+                </h1>
                 <SearchResults results={searchedAlbums} />
             </div>
             <div className="w-1/3">

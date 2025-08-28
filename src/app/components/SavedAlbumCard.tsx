@@ -3,14 +3,23 @@ import Image from "next/image";
 
 interface SavedAlbumProps {
     title: string;
-    artist: string;
-    cover?: string;
+    artists: [
+        {
+            name: string
+        }
+    ]
+    cover: string;
     releaseDate?: string;
     dateAdded: string;
 }
 
-export default function SavedAlbumCard({title, artist, cover, releaseDate, dateAdded} : SavedAlbumProps) {
-
+export default function SavedAlbumCard({title, artists, cover, releaseDate, dateAdded} : SavedAlbumProps) {
+    const totalArtists = artists.length;
+    let artistString = "";
+    artists.map((artists, index) => {
+        artistString += artists.name;
+        if (index !== totalArtists - 1) artistString += ", ";
+    });
 
     return (
         <div className="w-full h-28 bg-mq-lightgray rounded-3xl flex flex-row items-center justify-between  overflow-hidden shrink-0">
@@ -20,7 +29,7 @@ export default function SavedAlbumCard({title, artist, cover, releaseDate, dateA
             <div className="w-5/7 h-3/4 px-1 flex flex-row gap-x-2 grow justify-start items-center">
                 <div className="h-full aspect-square rounded-2xl overflow-hidden shrink-0 select-none">
                     <Image
-                        src="/images/EmptySymbol.png"
+                        src={cover}
                         alt="No Album Cover Provided"
                         width={300}
                         height={300}
@@ -29,7 +38,7 @@ export default function SavedAlbumCard({title, artist, cover, releaseDate, dateA
                 </div>
                 <div className="flex flex-col h-full justify-start">
                     <h1 className="font-bold text-sm text-ellipsis line-clamp-1">{title}</h1>
-                    <h2 className="font-semibold text-sm text-ellipsis text-mq-lightblue">{artist}</h2>
+                    <h2 className="font-semibold text-sm text-ellipsis line-clamp-1 text-mq-lightblue">{artistString}</h2>
                     <h2 className="font-medium text-sm">{releaseDate}</h2>
                     <h2 className="font-normal text-xs line-clamp-1 text-[#B7B7B7] italic">
                         Added by: {dateAdded}

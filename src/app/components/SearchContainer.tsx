@@ -6,7 +6,7 @@ export default function SearchContainer() {
 
     return (
         <div className="flex flex-col items-center gap-4 w-2/3">
-            <SearchBar />
+            {/* <SearchBar /> */}
             {/* <SearchResults /> */}
         </div>
     );

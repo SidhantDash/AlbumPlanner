@@ -6,7 +6,12 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { FaSearch } from "react-icons/fa";
 
 
-export default function SearchBar( { setResults } : any) {
+interface SearchBarProps {
+    setResults: any;
+    savedAlbums: SavedAlbum[];
+}
+
+export default function SearchBar( { setResults, savedAlbums } : SearchBarProps) {
 
     //const [searchParams, setSearchParams] = useState("");
     //const [searchResults, setSearchResults] = useState("");

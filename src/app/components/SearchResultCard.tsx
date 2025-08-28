@@ -2,6 +2,7 @@ import Image from "next/image";
 
 
 interface SearchResultProps {
+    id: string;
     title: string;
     artist: [
         {
@@ -10,13 +11,44 @@ interface SearchResultProps {
     ]
     cover: string;
     releaseDate?: string;
+    isSelected: boolean;
+    addSavedAlbum: any;
+    removeSavedAlbum: any;
 }
 
 // function dateToString(genres) {
 
 // }
 
-export default function SearchResultCard({title, artist, cover, releaseDate}: SearchResultProps) {
+export default function SearchResultCard({id, title, artist, cover, releaseDate, isSelected, addSavedAlbum, removeSavedAlbum }: SearchResultProps) {
+
+
+
+    function handleOnChange(id: string, selected: boolean) {
+        console.log("isSelected: " + selected);
+        
+        if (!selected) {
+            removeSavedAlbum(id);
+        } else {
+            addSavedAlbum({
+                id,
+                name: title,
+                artists: artist,
+                release_date: releaseDate,
+                images: [
+                    {
+                        url: cover
+                    }
+                ]
+            })
+        }
+
+        // setResults((currentResults: Album[]) => {
+        //     return currentResults.map(currentResult => {
+        //         if (currentResult.id === id) return { ...currentResult, }
+        //     });
+        // });
+    }
 
     const totalArtists = artist.length;
     let artistString = "";
@@ -46,10 +78,12 @@ export default function SearchResultCard({title, artist, cover, releaseDate}: Se
             <div className="flex content-center items-center">
                 <input
                     type="checkbox"
-                    className="w-6 h-6 appearance-none border-2 border-white rounded bg-transparent checked:hover:bg-mq-lightblue checked:bg-mq-lightblue checked:border-mq-lightblue transition-colors"
+                    className="w-6 h-6 appearance-none border-2 border-white rounded bg-transparent hover:cursor-pointer checked:hover:bg-mq-lightblue checked:bg-mq-lightblue checked:border-mq-lightblue transition-colors"
+                    checked={isSelected}
+                    onChange={e => handleOnChange(id, e.target.checked)}
                 >
                 </input>
             </div>
         </label>
-    )
+    );
 }

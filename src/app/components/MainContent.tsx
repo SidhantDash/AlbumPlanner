@@ -14,6 +14,26 @@ export default function MainContent() {
 
 
     function addSavedAlbum(item: Album) {
+
+
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = months[today.getMonth()];
+        const date = () => {
+            let d = today.getDate();
+            let d2 = d % 10;
+
+            if (d2 === 1 && d !== 11) return d + "st";
+            else if (d2 === 2 && d !== 12) return d + "nd";
+            else if (d2 === 3 && d !== 13) return d + "rd";
+            else return d + "th";
+            
+        };
+
+        const date_added = `${month} ${date()}, ${year}`
+
         setSavedAlbums((albums: SavedAlbum[]) => {
             return [
                 ...albums, {
@@ -22,7 +42,7 @@ export default function MainContent() {
                     artists: item.artists,
                     release_date: item.release_date,
                     images: item.images,
-                    date_added: "aasdf"
+                    date_added
                 }
             ];
         });
@@ -62,7 +82,10 @@ export default function MainContent() {
                 />
             </div>
             <div className="w-1/3">
-                <SavedAlbums savedAlbums={savedAlbums}/>
+                <SavedAlbums
+                    savedAlbums={savedAlbums}
+                    removeSavedAlbum={removeSavedAlbum}
+                />
             </div>
 
             

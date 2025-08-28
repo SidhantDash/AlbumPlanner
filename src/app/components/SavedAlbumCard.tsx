@@ -1,7 +1,9 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import Image from "next/image";
+import { useState } from "react";
 
 interface SavedAlbumProps {
+    id: string;
     title: string;
     artists: [
         {
@@ -11,15 +13,23 @@ interface SavedAlbumProps {
     cover: string;
     releaseDate?: string;
     dateAdded: string;
+    removeSavedAlbum: any;
 }
 
-export default function SavedAlbumCard({title, artists, cover, releaseDate, dateAdded} : SavedAlbumProps) {
+export default function SavedAlbumCard({id, title, artists, cover, releaseDate, dateAdded, removeSavedAlbum} : SavedAlbumProps) {
     const totalArtists = artists.length;
     let artistString = "";
     artists.map((artists, index) => {
         artistString += artists.name;
         if (index !== totalArtists - 1) artistString += ", ";
     });
+
+    const [isSelected, setIsSelected] = useState(true);
+
+    function handleOnChange() {
+        setIsSelected(false);
+        removeSavedAlbum(id);
+    }
 
     return (
         <div className="w-full h-28 bg-mq-lightgray rounded-3xl flex flex-row items-center justify-between  overflow-hidden shrink-0">
@@ -49,6 +59,8 @@ export default function SavedAlbumCard({title, artists, cover, releaseDate, date
                 <input
                     type="checkbox"
                     className="cursor-pointer w-6 h-6 appearance-none border-2 border-white rounded bg-transparent checked:hover:bg-mq-lightblue checked:bg-mq-lightblue checked:border-mq-lightblue transition-colors"
+                    checked={isSelected}
+                    onChange={() => handleOnChange()}
                 >
                 </input>
             </label>

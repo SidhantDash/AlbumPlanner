@@ -27,7 +27,7 @@ interface SearchResultsProps {
 export default function SearchResults({ results, savedAlbums, addSavedAlbum, removeSavedAlbum } : SearchResultsProps) {
 
     function checkSelected(id: string) {
-
+        // Tests whether at least one savedAlbum has the same id as the input id
         return savedAlbums.some(savedAlbum => id === savedAlbum.id);
     }
         

@@ -1,52 +1,14 @@
 import SavedAlbumCard from "./SavedAlbumCard";
 import { DragDropContext } from "@hello-pangea/dnd";
 
-export default function SavedAlbums({savedAlbums} : {savedAlbums: SavedAlbum[]}) {
+interface SavedAlbumsProps {
+    savedAlbums: SavedAlbum[];
+    removeSavedAlbum: any;
+}
+
+export default function SavedAlbums({savedAlbums, removeSavedAlbum}: SavedAlbumsProps) {
     return (
         <div className="bg-mq-darkgray h-full max-h-full rounded-3xl p-8 flex flex-col gap-y-4 overflow-y-scroll">
-            {/* <SavedAlbumCard 
-                title="WHERE IS MY HEAD?"
-                artist="Rich Brian"
-                releaseDate="2025"
-                dateAdded="08-15-2025"
-            />
-            <SavedAlbumCard 
-                title="WHERE IS MY HEAD?"
-                artist="Rich Brian"
-                releaseDate="2025"
-                dateAdded="08-15-2025"
-            />
-            <SavedAlbumCard 
-                title="WHERE IS MY HEAD?"
-                artist="Rich Brian"
-                releaseDate="2025"
-                dateAdded="08-15-2025"
-            />
-            <SavedAlbumCard 
-                title="WHERE IS MY HEAD?"
-                artist="Rich Brian"
-                releaseDate="2025"
-                dateAdded="08-15-2025"
-            />
-            <SavedAlbumCard 
-                title="WHERE IS MY HEAD?"
-                artist="Rich Brian"
-                releaseDate="2025"
-                dateAdded="08-15-2025"
-            />
-            <SavedAlbumCard 
-                title="WHERE IS MY HEAD?"
-                artist="Rich Brian"
-                releaseDate="2025"
-                dateAdded="08-15-2025"
-            />
-            <SavedAlbumCard 
-                title="WHERE IS MY HEAD?"
-                artist="Rich Brian"
-                releaseDate="2025"
-                dateAdded="08-15-2025"
-            /> */}
-
             {savedAlbums.length === 0 ? (
                 <div className="h-full w-full flex justify-center items-center text-xl italic text-[#B7B7B7]">
                     No Saved Albums
@@ -57,11 +19,13 @@ export default function SavedAlbums({savedAlbums} : {savedAlbums: SavedAlbum[]})
                 return (
                     <SavedAlbumCard 
                         key={album.id}
+                        id={album.id}
                         title={album.name}
                         artists={album.artists}
                         releaseDate={album.release_date}
                         cover={album.images[0].url ?? "/images/EmptySymbol.png"}
-                        dateAdded={"asdlfjasdfkh"}
+                        dateAdded={album.date_added}
+                        removeSavedAlbum={removeSavedAlbum}
                     />
                 );
             }))}

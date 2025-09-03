@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { auth } from "@/auth";
 import SignInButton from "./components/SignInButton";
+import SignOutButton from "./components/SignOutButton";
 import "./globals.css";
 
 import MainContent from "./components/MainContent";
@@ -25,6 +26,7 @@ export default async function Home() {
           alt={session.user.name ?? "Avatar"}
           />
         )}
+        <SignOutButton />
 
         <div className="p-16">
           <div className="flex flex-row mb-2">

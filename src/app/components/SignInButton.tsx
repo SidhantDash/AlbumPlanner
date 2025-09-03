@@ -1,6 +1,7 @@
 "use client";
 
 import { login } from "@/lib/actions/auth";
+import { loginGoogle } from "@/lib/actions/auth";
 
 export default function SignInButton() {
     return (
@@ -9,6 +10,11 @@ export default function SignInButton() {
             className="bg-white text-black"
             onClick={() => login()}>
                 Sign In with Github
+            </button>
+            <button
+            className="bg-white text-black"
+            onClick={() => loginGoogle()}>
+                Sign In with Google
             </button>
         </> 
     )

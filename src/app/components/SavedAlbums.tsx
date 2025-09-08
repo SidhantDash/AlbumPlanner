@@ -1,9 +1,12 @@
 import SavedAlbumCard from "./SavedAlbumCard";
 import { DragDropContext } from "@hello-pangea/dnd";
 import { Droppable } from "@hello-pangea/dnd";
+import { OnDragEndResponder } from "@hello-pangea/dnd";
+import { DropResult } from "@hello-pangea/dnd";
 
 interface SavedAlbumsProps {
     savedAlbums: SavedAlbum[];
+    setSavedAlbums: any;
     removeSavedAlbum: any;
 }
 
@@ -12,20 +15,27 @@ interface Results {
     sourceId: string;
 }
 
-export default function SavedAlbums({savedAlbums, removeSavedAlbum}: SavedAlbumsProps) {
+export default function SavedAlbums({savedAlbums, setSavedAlbums, removeSavedAlbum}: SavedAlbumsProps) {
 
-    function onDragEnd(sourceIndex: string, draggableId: string, destinationIndex?: string, ) {
+    const onDragEnd: OnDragEndResponder = (result: DropResult) => {
+        const {draggableId, source, destination} = result;
 
-        if (!destinationIndex) return;
+        // If there is no destination, then nothing need to do
+        if (!destination) return;
 
-        if (sourceIndex === destinationIndex) { // See if location of draggable changes
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ) { // See if location of draggable changes
             return; // Means we don't need to do anything
         }
-
-        // const savedAlbumsColumn = state.columns["SavedAlbumsDroppable"];
-        // const newSavedAlbumIds = Array.from(savedAlbumsColumn)
         
-        return "thing";
+        const newSavedAlbums: SavedAlbum[] = [...savedAlbums];
+
+        // Now need to move task id from old index to new index
+        const changingAlbum: SavedAlbum = newSavedAlbums.splice(source.index, 1)[0]; // "From this index, want to remove '1' (second param) item"
+        newSavedAlbums.splice(destination.index, 0, changingAlbum); // "Starm from desination index, remove nothing, and insert"
+
+        setSavedAlbums(newSavedAlbums);
 
     };
     

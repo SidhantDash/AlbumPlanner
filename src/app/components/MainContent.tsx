@@ -84,6 +84,7 @@ export default function MainContent() {
             <div className="w-1/3">
                 <SavedAlbums
                     savedAlbums={savedAlbums}
+                    setSavedAlbums={setSavedAlbums}
                     removeSavedAlbum={removeSavedAlbum}
                 />
             </div>

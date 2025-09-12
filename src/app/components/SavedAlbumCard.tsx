@@ -40,7 +40,7 @@ export default function SavedAlbumCard({id, index, title, artists, cover, releas
         >
             {(provided) => (
                 <div
-                    className="w-full h-28 bg-mq-lightgray rounded-3xl flex flex-row items-center justify-between  overflow-hidden shrink-0"
+                    className={`w-full h-28 bg-mq-lightgray rounded-3xl flex flex-row items-center justify-between  overflow-hidden shrink-0 mb-4`}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                 >

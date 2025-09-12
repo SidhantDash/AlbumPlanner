@@ -48,9 +48,9 @@ export default function SavedAlbums({savedAlbums, setSavedAlbums, removeSavedAlb
             <Droppable
                 droppableId={"SavedAlbumsDroppable"}
             >
-                {provided => (
+                {(provided) => (
                     <div
-                        className="bg-mq-darkgray h-full max-h-full rounded-3xl p-8 flex flex-col gap-y-4 overflow-y-scroll"
+                        className="bg-mq-darkgray h-full max-h-full rounded-3xl p-8 flex flex-col overflow-y-scroll pb-4"
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
@@ -75,6 +75,7 @@ export default function SavedAlbums({savedAlbums, setSavedAlbums, removeSavedAlb
                             );
                         }))}
                     
+                    {provided.placeholder}
                     </div>
                 )}
             </Droppable>
